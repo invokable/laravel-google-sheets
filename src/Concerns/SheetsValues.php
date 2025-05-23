@@ -105,7 +105,7 @@ trait SheetsValues
             foreach ($row as $key => $value) {
                 // If key is the same as value, that's because the user
                 // didn't specify a header that exists in the sheet.
-                if (is_null($value) || $key === $value) {
+                if (empty($value) || $key === $value) {
                     $notNull[] = '';
                 } else {
                     $notNull[] = $value;

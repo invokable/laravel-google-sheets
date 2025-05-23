@@ -1,0 +1,17 @@
+parameters:
+
+    paths:
+        - src/
+
+    # Level 10 is the highest level
+    level: 5
+
+    ignoreErrors:
+        #- '#PHPDoc tag @var#'
+        #- identifier: trait.unused
+        - identifier: nullCoalesce.variable
+        #- identifier: return.unusedType
+        #- identifier: phpDoc.parseError
+
+    excludePaths:
+        - ./src/Traits/*.php
