@@ -3,6 +3,7 @@
 [![packagist](https://badgen.net/packagist/v/revolution/laravel-google-sheets)](https://packagist.org/packages/revolution/laravel-google-sheets)
 [![Maintainability](https://qlty.sh/badges/483a3481-fbc3-4e43-a83f-a843a25a45d8/maintainability.svg)](https://qlty.sh/gh/invokable/projects/laravel-google-sheets)
 [![Code Coverage](https://qlty.sh/badges/483a3481-fbc3-4e43-a83f-a843a25a45d8/test_coverage.svg)](https://qlty.sh/gh/invokable/projects/laravel-google-sheets)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-google-sheets)
 
 ## Requirements
 - PHP >= 8.2
