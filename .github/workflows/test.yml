@@ -20,13 +20,13 @@ jobs:
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, bcmath
           coverage: xdebug
       - name: Install Composer dependencies
         run: composer install -q
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v9
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Test
+        run: vendor/bin/phpunit
+      - name: Code Coverage
+        uses: qltysh/qlty-action/coverage@v1
         with:
-          coverageCommand: vendor/bin/phpunit
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: build/logs/clover.xml
