@@ -15,7 +15,6 @@
   },
   "require-dev": {
     "orchestra/testbench": "^9.0",
-    "larastan/larastan": "^3.0",
     "pulkitjalan/google-apiclient": "^6.2"
   },
   "autoload": {
@@ -36,10 +35,7 @@
     }
   ],
   "scripts": {
-    "pre-autoload-dump": "Google\\Task\\Composer::cleanup",
-    "lint": [
-      "@php vendor/bin/phpstan analyse --verbose --ansi"
-    ]
+    "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
   },
   "extra": {
     "laravel": {
