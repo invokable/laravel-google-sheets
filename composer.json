@@ -14,7 +14,7 @@
     "google/apiclient": "^2.16"
   },
   "require-dev": {
-    "orchestra/testbench": "^9.0",
+    "orchestra/testbench": "^10.0",
     "pulkitjalan/google-apiclient": "^6.2"
   },
   "autoload": {
