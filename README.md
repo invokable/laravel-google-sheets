@@ -9,11 +9,6 @@
 - PHP >= 8.2
 - Laravel >= 11.0
 
-## Versioning
-- Basic : semver
-- Drop old PHP or Laravel version : `+0.1`. composer should handle it well.
-- Support only latest major version (`master` branch), but you can PR to old branches.
-
 ## Installation
 
 ### Composer
