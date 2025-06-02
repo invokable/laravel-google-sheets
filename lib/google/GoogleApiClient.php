@@ -93,7 +93,6 @@ class GoogleApiClient
     /**
      * Determine and use credentials if user has set them.
      *
-     * @param  string  $userEmail
      * @return bool used or not
      */
     protected function useAssertCredentials(string $userEmail = ''): bool
@@ -116,8 +115,6 @@ class GoogleApiClient
     /**
      * Magic call method.
      *
-     * @param  string  $method
-     * @param  array  $parameters
      * @return mixed
      *
      * @throws BadMethodCallException

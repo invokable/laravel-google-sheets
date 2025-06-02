@@ -21,7 +21,7 @@ class SheetsDriveTest extends TestCase
      */
     protected $files;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class SheetsDriveTest extends TestCase
         Sheets::setDriveService($this->service);
     }
 
-    public function testList()
+    public function test_list()
     {
         $file = new DriveFile([
             'id' => 'id',
@@ -50,7 +50,7 @@ class SheetsDriveTest extends TestCase
         $this->assertSame(['id' => 'name'], $list);
     }
 
-    public function testNull()
+    public function test_null()
     {
         Google::shouldReceive('make')->andReturn($this->service);
 

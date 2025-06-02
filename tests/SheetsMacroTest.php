@@ -6,7 +6,7 @@ use Revolution\Google\Sheets\Facades\Sheets;
 
 class SheetsMacroTest extends TestCase
 {
-    public function testMacro()
+    public function test_macro()
     {
         Sheets::macro('test', function () {
             return 'test';
@@ -19,7 +19,7 @@ class SheetsMacroTest extends TestCase
         $this->assertSame('test', $test);
     }
 
-    public function testMacroException()
+    public function test_macro_exception()
     {
         $this->expectException(\BadMethodCallException::class);
 

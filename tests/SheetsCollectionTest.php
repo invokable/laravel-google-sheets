@@ -6,7 +6,7 @@ use Revolution\Google\Sheets\Facades\Sheets;
 
 class SheetsCollectionTest extends TestCase
 {
-    public function testCollection()
+    public function test_collection()
     {
         $header = ['id', 'name', 'mail'];
         $rows = [
@@ -19,7 +19,7 @@ class SheetsCollectionTest extends TestCase
         $this->assertEquals('name1', $collection->first()['name']);
     }
 
-    public function testCollection2()
+    public function test_collection2()
     {
         $header = ['id', 'name', 'mail'];
         $rows = [
@@ -32,7 +32,7 @@ class SheetsCollectionTest extends TestCase
         $this->assertNotNull($collection->last()['mail']);
     }
 
-    public function testCollection3()
+    public function test_collection3()
     {
         $rows = collect([
             ['id', 'name', 'mail'],

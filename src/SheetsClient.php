@@ -15,10 +15,10 @@ use Revolution\Google\Sheets\Contracts\Factory;
 
 class SheetsClient implements Factory
 {
-    use Concerns\SheetsValues;
+    use Concerns\SheetsCollection;
     use Concerns\SheetsDrive;
     use Concerns\SheetsProperties;
-    use Concerns\SheetsCollection;
+    use Concerns\SheetsValues;
     use Conditionable;
     use Macroable {
         __call as macroCall;

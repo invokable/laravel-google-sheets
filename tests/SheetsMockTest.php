@@ -27,7 +27,7 @@ class SheetsMockTest extends TestCase
 
     protected SpreadsheetsValues $values;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->service = m::mock(GoogleSheets::class)->makePartial();
@@ -36,22 +36,22 @@ class SheetsMockTest extends TestCase
         $this->values = m::mock(SpreadsheetsValues::class);
         $this->service->spreadsheets_values = $this->values;
 
-        $this->sheet = new SheetsClient();
+        $this->sheet = new SheetsClient;
 
         $this->sheet->setService($this->service);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
 
         parent::tearDown();
     }
 
-    public function testSheetsAll()
+    public function test_sheets_all()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -68,10 +68,10 @@ class SheetsMockTest extends TestCase
         $this->assertSame([['test1' => '1'], ['test2' => '2']], $values);
     }
 
-    public function testSheetsEmpty()
+    public function test_sheets_empty()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
@@ -82,10 +82,10 @@ class SheetsMockTest extends TestCase
         $this->assertSame([], $values);
     }
 
-    public function testSheetsGet()
+    public function test_sheets_get()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -97,9 +97,9 @@ class SheetsMockTest extends TestCase
         $this->assertSame([['test1' => '1'], ['test2' => '2']], $values->toArray());
     }
 
-    public function testSheetsUpdate()
+    public function test_sheets_update()
     {
-        $response = new BatchUpdateValuesResponse();
+        $response = new BatchUpdateValuesResponse;
 
         $this->values->shouldReceive('batchUpdate')->once()->andReturn($response);
 
@@ -109,10 +109,10 @@ class SheetsMockTest extends TestCase
         $this->assertInstanceOf(BatchUpdateValuesResponse::class, $values);
     }
 
-    public function testSheetsFirst()
+    public function test_sheets_first()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -123,10 +123,10 @@ class SheetsMockTest extends TestCase
         $this->assertSame(['test1' => '1'], $value);
     }
 
-    public function testSheetsFirstEmpty()
+    public function test_sheets_first_empty()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
@@ -137,7 +137,7 @@ class SheetsMockTest extends TestCase
         $this->assertSame([], $value);
     }
 
-    public function testSheetsClear()
+    public function test_sheets_clear()
     {
         $this->values->shouldReceive('clear')->once();
 
@@ -146,7 +146,7 @@ class SheetsMockTest extends TestCase
         $this->assertNull($value);
     }
 
-    public function testSheetsAppend()
+    public function test_sheets_append()
     {
         $response = new AppendValuesResponse;
         $updates = new UpdateValuesResponse;
@@ -161,10 +161,10 @@ class SheetsMockTest extends TestCase
         $this->assertSame($response, $value);
     }
 
-    public function testSheetsAppendWithKeys()
+    public function test_sheets_append_with_keys()
     {
-        $response = new BatchGetValuesResponse();
-        $valueRange = new ValueRange();
+        $response = new BatchGetValuesResponse;
+        $valueRange = new ValueRange;
         $valueRange->setValues([['header1', 'header2'], ['value1', 'value2']]);
         $response->setValueRanges([$valueRange]);
 
@@ -176,19 +176,19 @@ class SheetsMockTest extends TestCase
         $this->assertSame([['', 'value3']], $ordered);
     }
 
-    public function testSpreadsheetProperties()
+    public function test_spreadsheet_properties()
     {
-        $this->spreadsheets->shouldReceive('get->getProperties->toSimpleObject')->once()->andReturn(new \stdClass());
+        $this->spreadsheets->shouldReceive('get->getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
 
         $properties = $this->sheet->spreadsheetProperties();
 
         $this->assertInstanceOf(\stdClass::class, $properties);
     }
 
-    public function testSheetProperties()
+    public function test_sheet_properties()
     {
         $sheet = m::mock(Spreadsheet::class);
-        $sheet->shouldReceive('getProperties->toSimpleObject')->once()->andReturn(new \stdClass());
+        $sheet->shouldReceive('getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
 
         $this->spreadsheets->shouldReceive('get->getSheets')->once()->andReturn([$sheet]);
 
@@ -197,14 +197,14 @@ class SheetsMockTest extends TestCase
         $this->assertInstanceOf(\stdClass::class, $properties);
     }
 
-    public function testMagicGet()
+    public function test_magic_get()
     {
         $spreadsheets = $this->sheet->spreadsheets;
 
         $this->assertNotNull($spreadsheets);
     }
 
-    public function testSheetsList()
+    public function test_sheets_list()
     {
         $sheets = new Sheet([
             'properties' => [
@@ -219,7 +219,7 @@ class SheetsMockTest extends TestCase
         $this->assertSame(['sheetId' => 'title'], $values);
     }
 
-    public function testSheetById()
+    public function test_sheet_by_id()
     {
         $sheets = new Sheet([
             'properties' => [
@@ -237,7 +237,7 @@ class SheetsMockTest extends TestCase
         $this->assertNotNull($sheet);
     }
 
-    public function testSpreadsheetByTitle()
+    public function test_spreadsheet_by_title()
     {
         $list = [
             'id' => 'title',
@@ -252,7 +252,7 @@ class SheetsMockTest extends TestCase
         $this->assertNotNull($sheet);
     }
 
-    public function testGetAccessToken()
+    public function test_get_access_token()
     {
         $sheet = m::mock(SheetsClient::class)->makePartial();
 
@@ -261,21 +261,21 @@ class SheetsMockTest extends TestCase
         $this->assertNull($token);
     }
 
-    public function testProperty()
+    public function test_property()
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $this->sheet->test;
     }
 
-    public function testGetClient()
+    public function test_get_client()
     {
         $client = $this->sheet->getClient();
 
         $this->assertNull($client);
     }
 
-    public function testAddSheet()
+    public function test_add_sheet()
     {
         $this->spreadsheets
             ->shouldReceive('batchUpdate')
@@ -285,7 +285,7 @@ class SheetsMockTest extends TestCase
         $this->assertNotNull($response);
     }
 
-    public function testDeleteSheet()
+    public function test_delete_sheet()
     {
         $sheets = new Sheet([
             'properties' => [
@@ -304,12 +304,12 @@ class SheetsMockTest extends TestCase
         $this->assertNotNull($response);
     }
 
-    public function testGetProperRanges()
+    public function test_get_proper_ranges()
     {
         $this->values
             ->shouldReceive('batchUpdate')
             ->times(3)
-            ->andReturn(new BatchUpdateValuesResponse());
+            ->andReturn(new BatchUpdateValuesResponse);
 
         // If no range is provided, we get the sheet automatically
         $this->sheet->sheet('test')->update([['test']]);

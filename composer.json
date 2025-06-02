@@ -14,7 +14,8 @@
   },
   "require-dev": {
     "orchestra/testbench": "^10.0",
-    "pulkitjalan/google-apiclient": "^6.2"
+    "pulkitjalan/google-apiclient": "^6.2",
+    "laravel/pint": "^1.22"
   },
   "autoload": {
     "psr-4": {
