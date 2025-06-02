@@ -14,7 +14,7 @@ class SheetsTest extends TestCase
      */
     protected $google;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,14 +22,14 @@ class SheetsTest extends TestCase
         app()->instance(GoogleApiClient::class, $this->google);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
 
         parent::tearDown();
     }
 
-    public function testService()
+    public function test_service()
     {
         $this->google->shouldReceive('make')->once()->andReturns(m::mock(\Google\Service\Sheets::class));
 
@@ -38,7 +38,7 @@ class SheetsTest extends TestCase
         $this->assertInstanceOf(\Google\Service\Sheets::class, Sheets::getService());
     }
 
-    public function testSetAccessToken()
+    public function test_set_access_token()
     {
         $this->google->shouldReceive('getCache')->once()->andReturn(m::self());
         $this->google->shouldReceive('clear')->once();
@@ -59,11 +59,11 @@ class SheetsTest extends TestCase
         $this->assertInstanceOf(\Google\Service\Sheets::class, $photos->getService());
     }
 
-    public function testTrait()
+    public function test_trait()
     {
         Sheets::shouldReceive('setAccessToken')->with('test')->once()->andReturn(m::self());
 
-        $sheets = (new User())->sheets();
+        $sheets = (new User)->sheets();
 
         $this->assertNotNull($sheets);
     }

@@ -19,6 +19,7 @@ trait SheetsValues
     protected ?string $majorDimension = null;
 
     protected ?string $valueRenderOption = null;
+
     protected ?string $dateTimeRenderOption = null;
 
     public function all(): array
@@ -45,10 +46,10 @@ trait SheetsValues
     {
         $range = $this->ranges();
 
-        $batch = new BatchUpdateValuesRequest();
+        $batch = new BatchUpdateValuesRequest;
         $batch->setValueInputOption($valueInputOption);
 
-        $valueRange = new ValueRange();
+        $valueRange = new ValueRange;
         $valueRange->setValues($value);
         $valueRange->setRange($range);
 
@@ -61,7 +62,7 @@ trait SheetsValues
     {
         $range = $this->ranges();
 
-        $clear = new ClearValuesRequest();
+        $clear = new ClearValuesRequest;
 
         return $this->serviceValues()->clear($this->getSpreadsheetId(), $range, $clear);
     }
@@ -71,7 +72,7 @@ trait SheetsValues
         $range = $this->ranges();
         $orderedValues = $this->orderAppendables($values);
 
-        $valueRange = new ValueRange();
+        $valueRange = new ValueRange;
         $valueRange->setValues($orderedValues);
         $valueRange->setRange($range);
 

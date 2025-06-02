@@ -11,21 +11,21 @@ use Revolution\Google\Client\GoogleApiClient;
 
 class ClientTest extends TestCase
 {
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         m::close();
 
         parent::tearDown();
     }
 
-    public function testClientGetter()
+    public function test_client_getter()
     {
         $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Client', $client->getClient());
     }
 
-    public function testClientGetterWithAdditionalConfig()
+    public function test_client_getter_with_additional_config()
     {
         $client = m::mock(GoogleApiClient::class, [[
             'config' => [
@@ -36,14 +36,14 @@ class ClientTest extends TestCase
         $this->assertEquals('test', $client->getClient()->getConfig('subject'));
     }
 
-    public function testServiceMake()
+    public function test_service_make()
     {
         $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
         $this->assertInstanceOf('Google\Service\Storage', $client->make('storage'));
     }
 
-    public function testServiceMakeException()
+    public function test_service_make_exception()
     {
         $client = m::mock(GoogleApiClient::class, [[]])->makePartial();
 
@@ -52,7 +52,7 @@ class ClientTest extends TestCase
         $client->make('storag');
     }
 
-    public function testMagicMethodException()
+    public function test_magic_method_exception()
     {
         $client = new GoogleApiClient([]);
 
@@ -61,14 +61,14 @@ class ClientTest extends TestCase
         $client->getAuthTest();
     }
 
-    public function testNoCredentials()
+    public function test_no_credentials()
     {
         $client = new GoogleApiClient([]);
 
         $this->assertFalse($client->isUsingApplicationDefaultCredentials());
     }
 
-    public function testDefaultCredentials()
+    public function test_default_credentials()
     {
         $client = new GoogleApiClient([
             'service' => [
