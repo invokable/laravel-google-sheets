@@ -6,3 +6,4 @@ tests/data/test*
 !tests/data/test-config-sample.php
 .idea
 .phpunit.result.cache
+build/
