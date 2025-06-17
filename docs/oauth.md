@@ -14,10 +14,6 @@ public function redirect()
                     ->redirect();
 }
 
-/**
- *
- * @return \Illuminate\Http\Response
- */
 public function callback()
 {
     if (!request()->has('code')) {

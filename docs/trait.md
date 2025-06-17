@@ -1,5 +1,4 @@
 # GoogleSheets Trait
-Like a Laravel Notifications.
 
 Add `GoogleSheets` trait to User model.
 
