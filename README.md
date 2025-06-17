@@ -5,6 +5,14 @@
 [![Code Coverage](https://qlty.sh/badges/483a3481-fbc3-4e43-a83f-a843a25a45d8/test_coverage.svg)](https://qlty.sh/gh/invokable/projects/laravel-google-sheets)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-google-sheets)
 
+## Overview
+
+...
+
+### Concept
+
+The main purpose of this package is **reading from Google Sheets**. Instead of specifying detailed conditions before reading, it is assumed that you first retrieve all data as a Laravel Collection and then process the data on the Laravel side.
+
 ## Requirements
 - PHP >= 8.2
 - Laravel >= 11.0
@@ -41,11 +49,11 @@ You must choose an authentication method based on your use case. This package su
 
 ### Authentication Methods Comparison
 
-| Method | Use Case | User Interaction | Access Scope | Complexity |
-|--------|----------|-----------------|--------------|------------|
-| **Service Account** | Server-to-server, automated systems | None required | Specific spreadsheets you own/share | Medium |
-| **OAuth 2.0** | User-facing applications | User consent required | User's own spreadsheets | High |
-| **API Key** | Public data only | None required | Public spreadsheets only | Low |
+| Method              | Use Case                            | User Interaction      | Access Scope                        | Complexity |
+|---------------------|-------------------------------------|-----------------------|-------------------------------------|------------|
+| **Service Account** | Server-to-server, automated systems | None required         | Specific spreadsheets you own/share | Medium     |
+| **OAuth 2.0**       | User-facing applications            | User consent required | User's own spreadsheets             | High       |
+| **API Key**         | Public data only                    | None required         | Public spreadsheets only            | Low        |
 
 ### Service Account (Recommended for most applications)
 **Best for:** Background jobs, automated systems, server-to-server access
@@ -204,25 +212,6 @@ $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('S
 //   ['1', 'name1', 'mail1'],
 //   ['2', 'name1', 'mail2']
 // ]
-```
-
-### Basic Non-Laravel Usage
-
-```php
-use Google\Client;
-use Revolution\Google\Sheets\SheetsClient;
-
-$client = new Client();
-$client->setScopes([Google\Service\Sheets::DRIVE, Google\Service\Sheets::SPREADSHEETS]);
-// setup Google Client
-// ...
-
-$service = new \Google\Service\Sheets($client);
-
-$sheets = new SheetsClient();
-$sheets->setService($service);
-
-$values = $sheets->spreadsheet('spreadsheetID')->sheet('Sheet 1')->all();
 ```
 
 ### Get a sheet's values with the header as the key
