@@ -70,6 +70,15 @@ GOOGLE_SERVICE_ENABLED=true
 GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION=storage/app/google-service-account.json
 ```
 
+**Important**: Ensure your `config/google.php` includes the required scopes setting for both OAuth and Service Account authentication:
+
+```php
+'scopes' => [
+    \Google\Service\Sheets::SPREADSHEETS,
+    \Google\Service\Drive::DRIVE,
+],
+```
+
 ## Step 7: Share Spreadsheets with Service Account
 
 For each Google Sheets spreadsheet you want to access:
