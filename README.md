@@ -53,8 +53,8 @@ Enable `Google Sheets API`, `Google Drive API`.
 - https://sheets.kawax.biz/
 
 Another Google API Series.
-- https://github.com/kawax/laravel-google-photos
-- https://github.com/kawax/laravel-google-searchconsole
+- https://github.com/invokable/laravel-google-photos
+- https://github.com/invokable/laravel-google-searchconsole
 
 ## Select auth type
 You must select an authentication type and configure it appropriately.
