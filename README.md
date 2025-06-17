@@ -383,10 +383,6 @@ Common solutions:
 - **OAuth**: Check if the access token is expired and refresh it
 - **API Key**: Verify the spreadsheet is publicly accessible
 
-### Can I use this package without Laravel?
-
-Yes! See the "Basic Non-Laravel Usage" example in the Usage section above.
-
 ### How do I deploy this to production?
 
 - Store service account credentials securely (outside web root)
