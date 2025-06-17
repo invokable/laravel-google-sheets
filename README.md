@@ -39,6 +39,15 @@ composer require revolution/laravel-google-sheets
 
 You must choose an authentication method based on your use case. This package supports three authentication methods:
 
+> **Scopes setting is required in config/google.php for both OAuth and Service Account authentication.**
+> Example:
+> ```php
+> 'scopes' => [
+>     \Google\Service\Sheets::SPREADSHEETS,
+>     \Google\Service\Drive::DRIVE,
+> ],
+> ```
+
 ### Authentication Methods Comparison
 
 | Method | Use Case | User Interaction | Access Scope | Complexity |
