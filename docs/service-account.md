@@ -182,6 +182,29 @@ Route::get('/test-sheets', function () {
 
 ## Advanced Configuration
 
+### Using JSON String in Environment Variable
+
+You can store the service account credentials as a JSON string in your environment variable and decode it in your configuration file. This method is particularly well-suited for deployment scenarios like GitHub Actions, as it allows the entire service account credentials to be stored as a single secret.
+
+**Step 1: Add JSON string to your `.env` file:**
+
+```env
+GOOGLE_SERVICE_ENABLED=true
+GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION='{"type": "service_account", "project_id": "your-project-id", "private_key_id": "your-private-key-id", "private_key": "-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n", "client_email": "your-service-account@your-project-id.iam.gserviceaccount.com", "client_id": "your-client-id", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs/your-service-account%40your-project-id.iam.gserviceaccount.com"}'
+```
+
+**Step 2: Update your `config/google.php` to decode the JSON string:**
+
+```php
+// config/google.php
+'service' => [
+    'enable' => env('GOOGLE_SERVICE_ENABLED', false),
+    'file' => json_decode(env('GOOGLE_SERVICE_ACCOUNT_JSON_LOCATION', ''), true),
+],
+```
+
+This approach eliminates the need to store a separate JSON file and makes deployment easier, especially in containerized environments or CI/CD pipelines.
+
 ### Using Credentials Array Instead of File
 
 You can also pass credentials as an array instead of a file path:
