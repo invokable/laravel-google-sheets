@@ -236,7 +236,9 @@ $values = Sheets::setAccessToken($token)->spreadsheet('spreadsheetId')->sheet('S
 // ]
 ```
 
-### Get a sheet's values with the header as the key
+### Get a sheet's values with the header as the key (Recommended)
+Collection conversion is simple and subsequent processing is flexible, so this method is recommended.
+
 ```php
 use Revolution\Google\Sheets\Facades\Sheets;
 
@@ -269,6 +271,14 @@ $values = Sheets::sheet('Sheet 1')->range('A1:B2')->all();
 //   ['1', 'name1'],
 // ]
 ```
+
+### About A1 Notation
+A1 Notation is the standard way to specify a cell or range in Google Sheets (e.g., 'A1', 'A1:B2').
+- 'A1' refers to the cell at column A and row 1.
+- 'A1:B2' refers to the range from cell A1 to B2 (rectangle).
+- 'A:B' refers to all rows in columns A and B.
+
+If you are not familiar with A1 Notation or your range is dynamic/complicated, it is often easier to fetch all data and use Laravel Collections to process/filter it after retrieval.
 
 ### Updating a specific range
 ```php
