@@ -340,7 +340,7 @@ $values = Sheets::sheet('Sheet 1')->majorDimension('DIMENSION_UNSPECIFIED')
 ```
 https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get#query-parameters
 
-## Use original Google_Service_Sheets
+## Use original Google\Service\Sheets
 ```php
 use Revolution\Google\Sheets\Facades\Sheets;
 
@@ -391,5 +391,4 @@ Common solutions:
 - Consider using different service accounts for different environments
 
 ## LICENSE
-MIT  
-Copyright kawax
+MIT License  
