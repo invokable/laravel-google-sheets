@@ -20,6 +20,18 @@
 - Automated reporting systems
 - Multi-user applications where each user manages their own spreadsheets
 
+## Copilot Environment Restrictions
+
+⚠️ **CRITICAL**: The Copilot firewall causes errors when connecting to `www.googleapis.com`
+
+- Google API calls will fail in the Copilot development environment
+- This affects testing and development of Google Sheets functionality
+- GitHub Actions and production environments have no such restrictions
+- **Workaround**: Use mock data or skip API calls when testing in Copilot environment
+- Real API functionality should be tested in GitHub Actions or local development environments
+
+**Note**: All examples and tests should be designed to handle API connectivity failures gracefully when running in restricted environments.
+
 ## Project Organization
 
 ### Core Systems Architecture
