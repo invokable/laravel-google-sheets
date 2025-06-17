@@ -7,7 +7,22 @@
 
 ## Overview
 
-...
+This package provides a **Laravel-idiomatic and streamlined interface** for interacting with Google Sheets API v4. It abstracts away the underlying Google PHP client complexity, letting developers read, write, update, and manage spreadsheets with expressive, fluent methods that feel natural in Laravel applications.
+
+**Key Features:**
+- **Multi-method Authentication**: Supports OAuth 2.0 (user-specific access), Service Account (server-to-server), and API key (public data access)
+- **Fluent API**: Chainable methods for data and sheet operations with intuitive syntax
+- **Laravel Collection Integration**: Seamlessly converts Google Sheets data into Laravel Collections for easy manipulation
+- **Extensibility**: Macro system allows you to add custom methods to the main facade
+- **Drive Integration**: Built-in Google Drive API support for spreadsheet management
+
+**Common Use Cases:**
+- **User Dashboards**: Display and interact with Google Sheets data in your application
+- **Import/Export**: Bulk data operations between your Laravel app and Google Sheets
+- **Automated Reports**: Generate and update reports programmatically
+- **Multi-user Applications**: Each user can manage their own Google Sheets with proper authentication
+
+> **⚠️ Development Note**: Google API calls will fail in GitHub Copilot environments due to firewall restrictions, but work normally in production and local development environments. Tests and examples are designed to handle this gracefully.
 
 ### Concept
 
