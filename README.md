@@ -22,8 +22,6 @@ This package provides a **Laravel-idiomatic and streamlined interface** for inte
 - **Automated Reports**: Generate and update reports programmatically
 - **Multi-user Applications**: Each user can manage their own Google Sheets with proper authentication
 
-> **⚠️ Development Note**: Google API calls will fail in GitHub Copilot environments due to firewall restrictions, but work normally in production and local development environments. Tests and examples are designed to handle this gracefully.
-
 ### Concept
 
 The main purpose of this package is **reading from Google Sheets**. Instead of specifying detailed conditions before reading, it is assumed that you first retrieve all data as a Laravel Collection and then process the data on the Laravel side.
