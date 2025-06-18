@@ -50,7 +50,7 @@ composer require revolution/laravel-google-sheets
 ## Demo & Examples
 
 - **Working Demo**: [Laravel Google Sheets Demo](https://sheets.kawax.biz/)
-- **Complete Example Project**: [google-sheets-project](https://github.com/kawax/google-sheets-project)
+- **Example Project**: [google-sheets-project](https://github.com/invokable/google-sheets-project)
 
 **Related Google API Packages:**
 - [Laravel Google Photos](https://github.com/invokable/laravel-google-photos)
