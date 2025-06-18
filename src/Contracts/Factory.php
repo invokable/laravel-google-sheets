@@ -11,22 +11,22 @@ use Illuminate\Support\Collection;
 
 interface Factory
 {
-    public function setService(mixed $service): static;
+    public function setService(mixed $service): self;
 
     public function getService(): Sheets;
 
     /**
      * set access_token and set new service.
      */
-    public function setAccessToken(array|string $token): static;
+    public function setAccessToken(array|string $token): self;
 
-    public function spreadsheet(string $spreadsheetId): static;
+    public function spreadsheet(string $spreadsheetId): self;
 
-    public function spreadsheetByTitle(string $title): static;
+    public function spreadsheetByTitle(string $title): self;
 
-    public function sheet(string $sheet): static;
+    public function sheet(string $sheet): self;
 
-    public function sheetById(string $sheetId): static;
+    public function sheetById(string $sheetId): self;
 
     public function sheetList(): array;
 
@@ -36,7 +36,7 @@ interface Factory
 
     public function spreadsheetList(): array;
 
-    public function setDriveService(mixed $drive): static;
+    public function setDriveService(mixed $drive): self;
 
     public function getDriveService(): mixed;
 
@@ -60,11 +60,11 @@ interface Factory
 
     public function ranges(): ?string;
 
-    public function range(string $range): static;
+    public function range(string $range): self;
 
-    public function majorDimension(string $majorDimension): static;
+    public function majorDimension(string $majorDimension): self;
 
-    public function dateTimeRenderOption(string $dateTimeRenderOption): static;
+    public function dateTimeRenderOption(string $dateTimeRenderOption): self;
 
     public function getSpreadsheetId(): string;
 

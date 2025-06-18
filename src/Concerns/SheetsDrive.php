@@ -29,7 +29,7 @@ trait SheetsDrive
         return $list;
     }
 
-    public function setDriveService(mixed $drive): static
+    public function setDriveService(mixed $drive): self
     {
         $this->drive = $drive;
 

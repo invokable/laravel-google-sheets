@@ -133,28 +133,28 @@ trait SheetsValues
         return $this->range;
     }
 
-    public function range(string $range): static
+    public function range(string $range): self
     {
         $this->range = $range;
 
         return $this;
     }
 
-    public function majorDimension(string $majorDimension): static
+    public function majorDimension(string $majorDimension): self
     {
         $this->majorDimension = $majorDimension;
 
         return $this;
     }
 
-    public function valueRenderOption(string $valueRenderOption): static
+    public function valueRenderOption(string $valueRenderOption): self
     {
         $this->valueRenderOption = $valueRenderOption;
 
         return $this;
     }
 
-    public function dateTimeRenderOption(string $dateTimeRenderOption): static
+    public function dateTimeRenderOption(string $dateTimeRenderOption): self
     {
         $this->dateTimeRenderOption = $dateTimeRenderOption;
 
