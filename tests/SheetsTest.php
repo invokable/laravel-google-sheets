@@ -31,7 +31,7 @@ class SheetsTest extends TestCase
 
     public function test_service()
     {
-        $this->google->shouldReceive('make')->once()->andReturns(m::mock(\Google\Service\Sheets::class));
+        $this->google->expects('make')->once()->andReturns(m::mock(\Google\Service\Sheets::class));
 
         //        Sheets::setService($this->google->make('Sheets'));
 
@@ -40,12 +40,11 @@ class SheetsTest extends TestCase
 
     public function test_set_access_token()
     {
-        $this->google->shouldReceive('getCache')->once()->andReturn(m::self());
-        $this->google->shouldReceive('clear')->once();
-        $this->google->shouldReceive('setAccessToken')->once();
-        $this->google->shouldReceive('isAccessTokenExpired')->once()->andReturns(true);
-        $this->google->shouldReceive('fetchAccessTokenWithRefreshToken')->once();
-        $this->google->shouldReceive('make')->times(2)->andReturns(
+        $this->google->expects('getCache->clear')->once();
+        $this->google->expects('setAccessToken')->once();
+        $this->google->expects('isAccessTokenExpired')->once()->andReturns(true);
+        $this->google->expects('fetchAccessTokenWithRefreshToken')->once();
+        $this->google->expects('make')->times(2)->andReturns(
             m::mock(\Google\Service\Sheets::class),
             m::mock(\Google\Service\Drive::class)
         );
@@ -61,7 +60,7 @@ class SheetsTest extends TestCase
 
     public function test_trait()
     {
-        Sheets::shouldReceive('setAccessToken')->with('test')->once()->andReturn(m::self());
+        Sheets::expects('setAccessToken')->with('test')->once()->andReturn(m::self());
 
         $sheets = (new User)->sheets();
 

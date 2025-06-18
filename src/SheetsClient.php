@@ -30,7 +30,7 @@ class SheetsClient implements Factory
 
     protected ?string $sheet = null;
 
-    public function setService(mixed $service): static
+    public function setService(mixed $service): self
     {
         $this->service = $service;
 
@@ -45,7 +45,7 @@ class SheetsClient implements Factory
     /**
      * set access_token and set new service.
      */
-    public function setAccessToken(#[\SensitiveParameter] array|string $token): static
+    public function setAccessToken(#[\SensitiveParameter] array|string $token): self
     {
         Google::getCache()->clear();
 
@@ -64,14 +64,14 @@ class SheetsClient implements Factory
         return $this->getService()->getClient()->getAccessToken();
     }
 
-    public function spreadsheet(string $spreadsheetId): static
+    public function spreadsheet(string $spreadsheetId): self
     {
         $this->spreadsheetId = $spreadsheetId;
 
         return $this;
     }
 
-    public function spreadsheetByTitle(string $title): static
+    public function spreadsheetByTitle(string $title): self
     {
         $list = $this->spreadsheetList();
 
@@ -80,14 +80,14 @@ class SheetsClient implements Factory
         return $this;
     }
 
-    public function sheet(string $sheet): static
+    public function sheet(string $sheet): self
     {
         $this->sheet = $sheet;
 
         return $this;
     }
 
-    public function sheetById(string $sheetId): static
+    public function sheetById(string $sheetId): self
     {
         $list = $this->sheetList();
 
