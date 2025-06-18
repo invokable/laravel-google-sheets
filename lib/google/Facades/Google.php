@@ -13,7 +13,7 @@ use Revolution\Google\Client\GoogleApiClient;
  * @method static void fetchAccessTokenWithRefreshToken(?string $refreshToken = null)
  * @method static CacheItemPoolInterface getCache()
  *
- * @see GoogleApiClient
+ * @mixin GoogleApiClient
  */
 class Google extends Facade
 {

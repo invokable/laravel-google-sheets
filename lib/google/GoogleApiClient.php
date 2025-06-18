@@ -4,6 +4,7 @@ namespace Revolution\Google\Client;
 
 use BadMethodCallException;
 use Google\Client as GoogleClient;
+use Google\Service as GoogleService;
 use Illuminate\Support\Arr;
 use Revolution\Google\Client\Exceptions\UnknownServiceException;
 
@@ -66,26 +67,45 @@ class GoogleApiClient
 
     /**
      * Getter for the google service.
-     *
-     * @throws UnknownServiceException|\ReflectionException
      */
-    public function make(string $service): mixed
+    public function make(string|GoogleService $service): mixed
     {
-        $service = 'Google\\Service\\'.ucfirst($service);
-
-        if (class_exists($service)) {
-            $class = new \ReflectionClass($service);
-
-            return $class->newInstance($this->client);
+        if ($service instanceof GoogleService) {
+            return $service;
         }
 
-        throw new UnknownServiceException($service);
+        if (str_starts_with($service, 'Google\\Service\\')) {
+            return new $service($this->client);
+        }
+
+        $service = 'Google\\Service\\'.ucfirst(str_replace('_', '', $service));
+
+        try {
+            if (class_exists($service)) {
+                return new $service($this->client);
+            }
+            // catch any errors thrown when fetching the service
+            // this can be caused when the service was removed
+            // but the reference still exists in the auto loader
+            // @codeCoverageIgnoreStart
+        } catch (\ErrorException $e) {
+            if (str_contains($e->getMessage(), 'No such file or directory')) {
+                UnknownServiceException::throwForService($service, 0, $e);
+            }
+
+            throw $e;
+            // @codeCoverageIgnoreEnd
+        }
+
+        UnknownServiceException::throwForService($service);
     }
 
     /**
      * Setup correct auth method based on type.
+     *
+     * @return void
      */
-    protected function auth(string $userEmail = ''): void
+    protected function auth($userEmail = '')
     {
         // see (and use) if user has set Credentials
         if ($this->useAssertCredentials($userEmail)) {
@@ -101,7 +121,7 @@ class GoogleApiClient
      *
      * @return bool used or not
      */
-    protected function useAssertCredentials(string $userEmail = ''): bool
+    protected function useAssertCredentials($userEmail = '')
     {
         $serviceJsonUrl = Arr::get($this->config, 'service.file', '');
 
@@ -121,14 +141,16 @@ class GoogleApiClient
     /**
      * Magic call method.
      *
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
      *
      * @throws BadMethodCallException
      */
-    public function __call(string $method, array $parameters)
+    public function __call($method, $parameters)
     {
         if (method_exists($this->client, $method)) {
-            return $this->client->{$method}(...array_values($parameters));
+            return call_user_func_array([$this->client, $method], $parameters);
         }
 
         throw new BadMethodCallException(sprintf('Method [%s] does not exist.', $method));
