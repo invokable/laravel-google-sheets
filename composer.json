@@ -35,7 +35,9 @@
     }
   ],
   "scripts": {
-    "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    "pre-autoload-dump": "Google\\Task\\Composer::cleanup",
+    "lint": "vendor/bin/pint",
+    "test": "vendor/bin/phpunit"
   },
   "extra": {
     "laravel": {
