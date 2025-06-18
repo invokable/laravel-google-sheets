@@ -22,7 +22,7 @@ return [
     'redirect_uri' => env('GOOGLE_REDIRECT', ''),
     'scopes' => [],
     'access_type' => 'online',
-    'approval_prompt' => 'auto',
+    'prompt' => 'auto',
 
     /*
     |----------------------------------------------------------------------------

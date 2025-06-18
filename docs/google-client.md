@@ -1,6 +1,6 @@
 # Use original Google api client
 
-This package includes `pulkitjalan/google-apiclient` to support the latest Laravel.
+This package includes **[pulkitjalan/google-apiclient](https://github.com/pulkitjalan/google-apiclient)** to support the latest Laravel.
 
 If you want to use the original package, you can change it with AppServiceProvider.
 
