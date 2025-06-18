@@ -1,9 +1,8 @@
 /vendor
 composer.lock
 .DS_Store
-tests/data/test*
+tests/data/
 !tests/data/test.json
-!tests/data/test-config-sample.php
 .idea
 .phpunit.result.cache
 build/
