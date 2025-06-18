@@ -55,7 +55,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+        $this->values->expects('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->spreadsheet('test')
             ->sheet('test')
@@ -75,7 +75,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+        $this->values->expects('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->all();
 
@@ -89,7 +89,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+        $this->values->expects('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $values = $this->sheet->get();
 
@@ -101,7 +101,7 @@ class SheetsMockTest extends TestCase
     {
         $response = new BatchUpdateValuesResponse;
 
-        $this->values->shouldReceive('batchUpdate')->once()->andReturn($response);
+        $this->values->expects('batchUpdate')->once()->andReturn($response);
 
         $values = $this->sheet->sheet('test')->range('A1')->update([['test']]);
 
@@ -116,7 +116,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+        $this->values->expects('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $value = $this->sheet->first();
 
@@ -130,7 +130,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues(null);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
+        $this->values->expects('batchGet')->with(m::any(), m::any())->once()->andReturn($response);
 
         $value = $this->sheet->first();
 
@@ -139,7 +139,7 @@ class SheetsMockTest extends TestCase
 
     public function test_sheets_clear()
     {
-        $this->values->shouldReceive('clear')->once();
+        $this->values->expects('clear')->once();
 
         $value = $this->sheet->clear();
 
@@ -154,7 +154,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['test1' => '1'], ['test2' => '2']]);
         $response->setUpdates($updates);
 
-        $this->values->shouldReceive('append')->once()->andReturn($response);
+        $this->values->expects('append')->once()->andReturn($response);
 
         $value = $this->sheet->append([[]]);
 
@@ -168,7 +168,7 @@ class SheetsMockTest extends TestCase
         $valueRange->setValues([['header1', 'header2'], ['value1', 'value2']]);
         $response->setValueRanges([$valueRange]);
 
-        $this->values->shouldReceive('batchGet')
+        $this->values->expects('batchGet')
             ->with(m::any(), m::any())
             ->andReturn($response);
 
@@ -178,7 +178,7 @@ class SheetsMockTest extends TestCase
 
     public function test_spreadsheet_properties()
     {
-        $this->spreadsheets->shouldReceive('get->getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
+        $this->spreadsheets->expects('get->getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
 
         $properties = $this->sheet->spreadsheetProperties();
 
@@ -188,9 +188,9 @@ class SheetsMockTest extends TestCase
     public function test_sheet_properties()
     {
         $sheet = m::mock(Spreadsheet::class);
-        $sheet->shouldReceive('getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
+        $sheet->expects('getProperties->toSimpleObject')->once()->andReturn(new \stdClass);
 
-        $this->spreadsheets->shouldReceive('get->getSheets')->once()->andReturn([$sheet]);
+        $this->spreadsheets->expects('get->getSheets')->once()->andReturn([$sheet]);
 
         $properties = $this->sheet->sheetProperties();
 
@@ -213,7 +213,7 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $this->spreadsheets->expects('get->getSheets')->andReturn([$sheets]);
         $values = $this->sheet->sheetList();
 
         $this->assertSame(['sheetId' => 'title'], $values);
@@ -230,7 +230,7 @@ class SheetsMockTest extends TestCase
 
         $sheet = m::mock(SheetsClient::class)->makePartial();
 
-        $sheet->shouldReceive('sheetList')->andReturn([$sheets]);
+        $sheet->expects('sheetList')->andReturn([$sheets]);
 
         $sheet->sheetById('sheetId');
 
@@ -245,7 +245,7 @@ class SheetsMockTest extends TestCase
 
         $sheet = m::mock(SheetsClient::class)->makePartial();
 
-        $sheet->shouldReceive('spreadsheetList')->andReturn($list);
+        $sheet->expects('spreadsheetList')->andReturn($list);
 
         $sheet->spreadsheetByTitle('title');
 
@@ -278,7 +278,7 @@ class SheetsMockTest extends TestCase
     public function test_add_sheet()
     {
         $this->spreadsheets
-            ->shouldReceive('batchUpdate')
+            ->expects('batchUpdate')
             ->andReturn(new BatchUpdateSpreadsheetResponse);
 
         $response = $this->sheet->addSheet('new sheet');
@@ -294,12 +294,11 @@ class SheetsMockTest extends TestCase
             ],
         ]);
 
-        $this->spreadsheets->shouldReceive('get->getSheets')->andReturn([$sheets]);
+        $this->spreadsheets->expects('get->getSheets')->andReturn([$sheets]);
         $this->spreadsheets
-            ->shouldReceive('batchUpdate')
+            ->expects('batchUpdate')
             ->andReturn(new BatchUpdateSpreadsheetResponse);
 
-        $this->sheet->shouldReceive('sheetList')->andReturn([$sheets]);
         $response = $this->sheet->deleteSheet('title');
         $this->assertNotNull($response);
     }
@@ -307,7 +306,7 @@ class SheetsMockTest extends TestCase
     public function test_get_proper_ranges()
     {
         $this->values
-            ->shouldReceive('batchUpdate')
+            ->expects('batchUpdate')
             ->times(3)
             ->andReturn(new BatchUpdateValuesResponse);
 

@@ -43,7 +43,7 @@ class SheetsDriveTest extends TestCase
             $file,
         ];
 
-        $this->files->shouldReceive('listFiles->getFiles')->once()->andReturn($files);
+        $this->files->expects('listFiles->getFiles')->once()->andReturn($files);
 
         $list = Sheets::spreadsheetList();
 
@@ -52,7 +52,7 @@ class SheetsDriveTest extends TestCase
 
     public function test_null()
     {
-        Google::shouldReceive('make')->andReturn($this->service);
+        Google::expects('make')->andReturn($this->service);
 
         $drive = Sheets::setDriveService(null)->getDriveService();
 
