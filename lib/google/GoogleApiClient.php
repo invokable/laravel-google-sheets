@@ -33,7 +33,7 @@ class GoogleApiClient
 
         // only allow prompt or approval_prompt
         if (Arr::has($config, 'prompt')) {
-            $this->client->setPrompt(Arr::get($config, 'prompt', 'auto'));
+            $this->client->setPrompt(Arr::get($config, 'prompt', 'consent select_account'));
         } elseif (Arr::has($config, 'approval_prompt')) {
             $this->client->setApprovalPrompt(Arr::get($config, 'approval_prompt', 'auto'));
         }

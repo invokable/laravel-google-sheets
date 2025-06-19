@@ -60,7 +60,7 @@ Update your `config/google.php`:
     \Google\Service\Drive::DRIVE,
 ],
 'access_type' => 'offline', // Required for refresh tokens
-'approval_prompt' => 'force', // Force consent to get refresh token
+'prompt' => 'consent select_account',
 ```
 
 ## Step 4: Install and Configure Laravel Socialite
