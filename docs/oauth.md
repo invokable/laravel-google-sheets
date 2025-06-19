@@ -1,6 +1,7 @@
 # OAuth 2.0 Authentication
 
-OAuth 2.0 authentication allows users to grant your application access to their personal Google Sheets. This method is ideal for user-facing applications where each user needs to access their own spreadsheets.
+OAuth 2.0 authentication allows users to grant your application access to their personal Google Sheets. This method is
+ideal for user-facing applications where each user needs to access their own spreadsheets.
 
 ## When to Use OAuth Authentication
 
@@ -21,21 +22,21 @@ OAuth 2.0 authentication allows users to grant your application access to their 
 2. Select your project or create a new one
 3. Navigate to **APIs & Services** > **Library**
 4. Enable the following APIs:
-   - **Google Sheets API**
-   - **Google Drive API**
+    - **Google Sheets API**
+    - **Google Drive API**
 
 ## Step 2: Create OAuth 2.0 Credentials
 
 1. Go to **APIs & Services** > **Credentials**
 2. Click **Create Credentials** > **OAuth client ID**
 3. If prompted, configure the OAuth consent screen:
-   - Choose **External** for public applications
-   - Fill in required fields (app name, user support email, developer contact)
-   - Add scopes: `https://www.googleapis.com/auth/spreadsheets` and `https://www.googleapis.com/auth/drive`
+    - Choose **External** for public applications
+    - Fill in required fields (app name, user support email, developer contact)
+    - Add scopes: `https://www.googleapis.com/auth/spreadsheets` and `https://www.googleapis.com/auth/drive`
 4. For application type, choose **Web application**
 5. Add authorized redirect URIs:
-   - For development: `http://localhost:8000/auth/google/callback`
-   - For production: `https://yourdomain.com/auth/google/callback`
+    - For development: `http://localhost:8000/auth/google/callback`
+    - For production: `https://yourdomain.com/auth/google/callback`
 6. Click **Create**
 7. Copy the **Client ID** and **Client Secret**
 
@@ -98,13 +99,10 @@ class AuthController extends Controller
     public function redirectToGoogle()
     {
         return Socialite::driver('google')
-            ->scopes([
-                'https://www.googleapis.com/auth/spreadsheets',
-                'https://www.googleapis.com/auth/drive'
-            ])
+            ->scopes(config('google.scopes'))
             ->with([
-                'access_type' => 'offline',
-                'prompt' => 'consent select_account'
+                'access_type' => config('google.access_type'),
+                'prompt' => config('google.prompt'),
             ])
             ->redirect();
     }
@@ -139,7 +137,7 @@ class AuthController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect('/');
     }
 }
@@ -221,7 +219,7 @@ public function getSheetData(Request $request)
 
     try {
         $token = $user->getGoogleTokenArray();
-        
+
         $values = Sheets::setAccessToken($token)
             ->spreadsheet('user-spreadsheet-id')
             ->sheet('Sheet1')
@@ -233,7 +231,7 @@ public function getSheetData(Request $request)
         if (str_contains($e->getMessage(), 'invalid_grant') || str_contains($e->getMessage(), 'unauthorized')) {
             return redirect()->route('google.redirect');
         }
-        
+
         throw $e;
     }
 }
@@ -284,12 +282,12 @@ class RequireGoogleAuth
     public function handle(Request $request, Closure $next)
     {
         $user = $request->user();
-        
+
         if (!$user || !$user->hasValidGoogleToken()) {
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'Google authentication required'], 401);
             }
-            
+
             return redirect()->route('google.redirect');
         }
 
@@ -301,16 +299,19 @@ class RequireGoogleAuth
 ## Security Considerations
 
 ### 1. Token Storage
+
 - Store tokens securely in the database
 - Use Laravel's built-in encryption for sensitive fields
 - Never expose tokens in client-side code
 
 ### 2. Scope Management
+
 - Only request necessary scopes
 - Use least-privilege principle
 - Clearly explain to users what access you need
 
 ### 3. Error Handling
+
 - Handle expired tokens gracefully
 - Provide clear re-authentication flows
 - Log authentication errors for monitoring
@@ -320,16 +321,19 @@ class RequireGoogleAuth
 ### Common OAuth Errors
 
 **"redirect_uri_mismatch"**
+
 - Ensure redirect URI in Google Console matches exactly with your application
 - Check for http vs https mismatches
 - Verify trailing slashes match
 
 **"invalid_grant" or "unauthorized"**
+
 - Token has expired and refresh failed
 - Redirect user to re-authenticate
 - Check if refresh token is available
 
 **"access_denied"**
+
 - User denied permission
 - Handle gracefully with appropriate messaging
 - Provide option to retry authentication
@@ -356,7 +360,3 @@ Route::get('/test-oauth', function (Request $request) {
     }
 })->middleware('auth');
 ```
-
-## Example Implementation
-
-For a complete working example, see the [Laravel Google Sheets Demo Project](https://github.com/kawax/google-sheets-project/blob/6.x/app/Http/Controllers/LoginController.php).
