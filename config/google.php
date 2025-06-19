@@ -21,7 +21,7 @@ return [
     'client_secret' => env('GOOGLE_CLIENT_SECRET', ''),
     'redirect_uri' => env('GOOGLE_REDIRECT', ''),
     'scopes' => [],
-    'access_type' => 'online',
+    'access_type' => 'offline',
     'prompt' => 'consent select_account',
 
     /*
