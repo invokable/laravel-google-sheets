@@ -27,8 +27,8 @@ This package provides a **Laravel-idiomatic and streamlined interface** for inte
 The main purpose of this package is **reading from Google Sheets**. Instead of specifying detailed conditions before reading, it is assumed that you first retrieve all data as a Laravel Collection and then process the data on the Laravel side.
 
 ## Requirements
-- PHP >= 8.2
-- Laravel >= 11.0
+- PHP >= 8.3
+- Laravel >= 12.0
 
 ## Installation
 
