@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Google\Service\Drive;
 use Mockery as m;
 use Revolution\Google\Client\GoogleApiClient;
 use Revolution\Google\Sheets\Facades\Sheets;
@@ -46,7 +47,7 @@ class SheetsTest extends TestCase
         $this->google->expects('fetchAccessTokenWithRefreshToken')->once();
         $this->google->expects('make')->times(2)->andReturns(
             m::mock(\Google\Service\Sheets::class),
-            m::mock(\Google\Service\Drive::class)
+            m::mock(Drive::class)
         );
 
         $photos = Sheets::setAccessToken([

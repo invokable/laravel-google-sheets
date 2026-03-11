@@ -11,6 +11,7 @@ use Google\Service\Sheets\ClearValuesResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
 use Revolution\Google\Sheets\Contracts\Factory;
+use Revolution\Google\Sheets\SheetsClient;
 
 /**
  * @method static self setAccessToken(array|string $token)
@@ -42,7 +43,7 @@ use Revolution\Google\Sheets\Contracts\Factory;
  * @method static string getSpreadsheetId()
  * @method static void macro(string $name, object|callable $macro)
  *
- * @see \Revolution\Google\Sheets\SheetsClient
+ * @see SheetsClient
  */
 class Sheets extends Facade
 {

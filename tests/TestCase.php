@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use PulkitJalan\Google\GoogleServiceProvider as PulkitJalanServiceProvider;
 use Revolution\Google\Client\Providers\GoogleServiceProvider;
@@ -27,7 +28,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
     protected function getEnvironmentSetUp($app): void
     {
