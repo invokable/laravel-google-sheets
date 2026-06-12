@@ -27,7 +27,7 @@ jobs:
       - name: Test
         run: vendor/bin/phpunit
       - name: Code Coverage
-        uses: qltysh/qlty-action/coverage@v1
+        uses: qltysh/qlty-action/coverage@v2
         with:
           oidc: true
           files: build/logs/clover.xml
