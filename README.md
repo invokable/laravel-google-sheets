@@ -53,7 +53,6 @@ composer require revolution/laravel-google-sheets
 - **Example Project**: [google-sheets-project](https://github.com/invokable/google-sheets-project)
 
 **Related Google API Packages:**
-- [Laravel Google Photos](https://github.com/invokable/laravel-google-photos)
 - [Laravel Google Search Console](https://github.com/invokable/laravel-google-searchconsole)
 
 ## Authentication
