@@ -5,6 +5,8 @@
 [![Code Coverage](https://qlty.sh/badges/483a3481-fbc3-4e43-a83f-a843a25a45d8/test_coverage.svg)](https://qlty.sh/gh/invokable/projects/laravel-google-sheets)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-google-sheets)
 
+[Docs](https://kawax.biz/en/packages/laravel-google-sheets)
+
 ## Overview
 
 This package provides a **Laravel-idiomatic and streamlined interface** for interacting with Google Sheets API v4. It abstracts away the underlying Google PHP client complexity, letting developers read, write, update, and manage spreadsheets with expressive, fluent methods that feel natural in Laravel applications.
